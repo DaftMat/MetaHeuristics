@@ -7,6 +7,7 @@
 
 
 #include <functional>
+#include <vector>
 
 template <class T>
 class Searchable {
@@ -15,11 +16,15 @@ public:
 
     virtual T generate() const = 0;
     virtual T greatest_neighbor(const T&) const = 0;
-    T steepest_hill_climbing(int max_shift, int max_tries) const;
-    //T taboo() const;
+    virtual T greatest_neighbor_not_taboo(const T&, const std::vector<T>&) const = 0;
+    virtual std::vector<T> neighbors(const T&) const = 0;
+    virtual std::vector<T> neighbors_not_taboo(const T&, const std::vector<T>&) const = 0;
+    double apply_f(const T &x) const { return f(x); }
+    T steepest_hill_climbing(T s, int max_shift, int max_tries, int p = 0) const;
+    T _steepest_hill_climbing(T _s, int max_shift, int &n_shift, int p = 0) const;
+    T taboo(T &_s, int max_shift, int max_size) const;
 
 private:
-    T _steepest_hill_climbing(int max_shift) const;
 
 protected:
     std::function<double(T)> f;

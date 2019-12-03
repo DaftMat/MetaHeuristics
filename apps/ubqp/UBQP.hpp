@@ -20,6 +20,9 @@ public:
 
     std::vector<int> generate() const override;
     std::vector<int> greatest_neighbor(const std::vector<int> &s) const override;
+    std::vector<int> greatest_neighbor_not_taboo(const std::vector<int> &s, const std::vector<std::vector<int>> &t) const override;
+    std::vector<std::vector<int>> neighbors(const std::vector<int> &s) const override;
+    std::vector<std::vector<int>> neighbors_not_taboo(const std::vector<int> &s, const std::vector<std::vector<int>> &t) const override;
 
 private:
     int m_N;
